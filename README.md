@@ -16,11 +16,8 @@ See in [/samples](/samples) folder for some examples.
 git clone https://github.com/mitzki/energenie-magic.git
 cd energenie-magic
 npm install
-# UPDATING IP ADRESS, PASSWORD AND PORT IN SAMPLES FILES FOR YOUR ENVIRONMENT
-# GET ALL STATES
-node .\samples\getPowerStates.js
-# TURN ALL SOCKETS ON
-node .\samples\turnAllSocketsOn.js
+node .\samples\getPowerStates.js --host <ip-adress/hostname> [--port <port-number> --password <password>]
+node .\samples\turnAllSocketsOn.js  --host <ip-adress/hostname> [--port <port-number> --password <password>]
 ```
 ## getSockets()
 Get information of sockets.

@@ -4,8 +4,22 @@
             {
                 "type": "node",
                 "request": "launch",
-                "name": "run backend",
-                "program": "${workspaceRoot}/backend/main.js",
+                "name": "getPowerStates",
+                "program": "${workspaceRoot}\\samples\\getPowerStates",
+                "args": [
+                    "--host",
+                    "192.168.78.79"
+                ],
+                "cwd": "${workspaceRoot}"
+            },{
+                "type": "node",
+                "request": "launch",
+                "name": "turnAllSocketsOn",
+                "program": "${workspaceRoot}\\samples\\turnAllSocketsOn",
+                "args": [
+                    "--host",
+                    "192.168.78.79"
+                ],
                 "cwd": "${workspaceRoot}"
             }
         ]
