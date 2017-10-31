@@ -1,4 +1,10 @@
 {
+  /**
+   * Sample File.
+   * Demonstrating how to get status information from Energenie power stride.
+   * 
+   * @author Michael Kolodziejczyk
+   */
   const EnergenieMagic = require('../src/EnergenieMagic.js');
   
   function getArgVByKey(key) {
@@ -18,8 +24,8 @@
     console.error(new Error('NOT_ENOUGH_ARGUMENTS'));
   } else {
     const power_stride = new EnergenieMagic({
-      password: getArgVByKey('--password'), // replace
-      host: getArgVByKey('--host'), // replace
+      password: getArgVByKey('--password'),
+      host: getArgVByKey('--host'),
       port: getArgVByKey('--port')
     });
     let sockets = {};

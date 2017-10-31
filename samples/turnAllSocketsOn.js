@@ -1,4 +1,10 @@
 {
+  /**
+   * Sample File.
+   * Demonstrating how to change status of sockets of Energenie power stride.
+   * 
+   * @author Michael Kolodziejczyk
+   */
   const EnergenieMagic = require('../src/EnergenieMagic.js');
   
   function getArgVByKey(key) {
