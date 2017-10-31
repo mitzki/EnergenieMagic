@@ -1,5 +1,5 @@
 # energenie-magic
-Package to get and set states of the energenie power stripe sockets.
+Package to get and set states of the energenie power strip sockets.
 
 Tested with Node 8.5.0
 
@@ -20,7 +20,7 @@ node .\samples\getPowerStates.js --host <ip-adress/hostname> [--port <port-numbe
 node .\samples\turnAllSocketsOn.js  --host <ip-adress/hostname> [--port <port-number> --password <password>]
 ```
 ## getSockets()
-Get information of sockets.
+Get information of sockets of the connected power strip.
 
 ### Sample Usage
 ```javascript
@@ -58,7 +58,7 @@ power_strip.getSockets().then(function(sockets) {
 ```
 
 ## setSocketState(id, state)
-Set socket of power stride. 
+Set socket of power strip. 
 + `id` is the key of the getSockets() result JSON.
 + `state` is a boolean. 
 
