@@ -8,7 +8,7 @@ Tested with Node 8.5.0
 # getSockets()
 Get information of sockets as JSON
 
-## Example
+## Returns
 `{
 	"cte1": {
 		"key": "cte1",
