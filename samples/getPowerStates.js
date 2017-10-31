@@ -1,9 +1,9 @@
 {
-	const EnergenieMagic = require('energenie-magic');
+	const EnergenieMagic = require('../src/EnergenieMagic.js');
 	const power_stride = new EnergenieMagic({
-		password: <energenie password>,
-		host: <energenie host name or ip adress>,
-		port: <energenie port>
+		password: '', // replace
+		host: '192.168.78.79', // replace
+		port: 80 // replace
 	});
 	let sockets = {};
 	
