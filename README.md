@@ -70,6 +70,3 @@ power_strip.setSocketState('cte1', false).then(function(val) {
     console.error(new Error(err));
 });
 ```
-
-***
-MIT License
