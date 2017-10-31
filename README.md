@@ -34,26 +34,26 @@ power_stride.getSockets().then(function(sockets) {
 ### Returns
 ```javascript
 {
-	"cte1": {
-		"key": "cte1",
-		"name": "Socket A",
-		"state": true
-	},
-	"cte2": {
-		"key": "cte2",
-		"name": "Socket B",
-		"state": false
-	},
-	"cte3": {
-		"key": "cte3",
-		"name": "Socket C",
-		"state": true
-	},  
-	"cte4": {
-		"key": "cte4",
-		"name": "Socket D",
-		"state": false
-	}
+  "cte1": {
+    "key": "cte1",
+    "name": "Socket A",
+    "state": true
+  },
+  "cte2": {
+    "key": "cte2",
+    "name": "Socket B",
+    "state": false
+  },
+  "cte3": {
+    "key": "cte3",
+    "name": "Socket C",
+    "state": true
+  },  
+  "cte4": {
+    "key": "cte4",
+    "name": "Socket D",
+    "state": false
+  }
 }
 ```
 
