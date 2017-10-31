@@ -1,7 +1,7 @@
 {
   /**
    * Sample File.
-   * Demonstrating how to change status of sockets of Energenie power stride.
+   * Demonstrating how to change status of sockets of Energenie power strip.
    * 
    * @author Michael Kolodziejczyk
    */
@@ -23,17 +23,17 @@
   if (process.argv.length < 3) {
     console.error(new Error('NOT_ENOUGH_ARGUMENTS'));
   } else {
-    const power_stride = new EnergenieMagic({
+    const power_strip = new EnergenieMagic({
       password: getArgVByKey('--password'),
       host: getArgVByKey('--host'),
       port: getArgVByKey('--port')
     });
     
-    power_stride.getSockets()
+    power_strip.getSockets()
       .then(function(sockets) {
         let state = true;
         for (id in sockets) {
-          power_stride.setSocketState(id, state).then(function(val) {
+          power_strip.setSocketState(id, state).then(function(val) {
             console.log(val);
           }).catch(function(err) {
             console.error(new Error(err));

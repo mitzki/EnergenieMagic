@@ -24,7 +24,7 @@ Get information of sockets.
 
 ### Sample Usage
 ```javascript
-power_stride.getSockets().then(function(sockets) {
+power_strip.getSockets().then(function(sockets) {
     console.log(sockets);
 }).catch(function(err) {
     console.error(new Error(err)); 
@@ -64,7 +64,7 @@ Set socket of power stride.
 
 ### Sample Usage
 ```javascript
-power_stride.setSocketState('cte1', false).then(function(val) {
+power_strip.setSocketState('cte1', false).then(function(val) {
     console.log(val);
 }).catch(function(err) {
     console.error(new Error(err));
