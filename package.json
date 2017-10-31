@@ -1,0 +1,15 @@
+{
+  "name": "energenie-magic",
+  "version": "1.0.0",
+  "description": "Package to get and set states of the energenie power stripe.",
+  "main": "src\\EnergenieMagic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "energenie",
+    "control"
+  ],
+  "author": "Michael Kolodziejczyk",
+  "license": "MIT"
+}
