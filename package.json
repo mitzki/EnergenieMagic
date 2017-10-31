@@ -1,6 +1,6 @@
 {
   "name": "energenie-magic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package to get and set states of the energenie power strip.",
   "main": "src\\EnergenieMagic.js",
   "dependencies": {
