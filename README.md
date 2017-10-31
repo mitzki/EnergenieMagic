@@ -5,11 +5,17 @@ See in /samples folder for some examples.
 
 Tested with Node 8.5.0
 
-# getSockets()
+## Use it
+``` 
+npm install --save energenie-magic 
+```
+
+## getSockets()
 Get information of sockets as JSON
 
-## Returns
-`{
+### Returns
+```javascript
+{
 	"cte1": {
 		"key": "cte1",
 		"name": "Socket A",
@@ -30,7 +36,17 @@ Get information of sockets as JSON
 		"name": "Socket D",
 		"state": false
 	}
-}`
+}
+```
+
+## setSocketState(id, state)
+```javascript
+power_stride.setSocketState('cte1', false).then(function(val) {
+    console.log(val);
+}).catch(function(err) {
+    console.error(new Error(err));
+});
+```
 
 ***
 MIT License
