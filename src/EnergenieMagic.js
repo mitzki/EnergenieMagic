@@ -165,7 +165,12 @@
         });
     });
   }
-
+  
+  /**
+   * Energenie Magic Class.
+   *
+   * @author Michael Kolodziejczyk
+   */
   class EnergenieMagic {
 
     constructor(options_) {
