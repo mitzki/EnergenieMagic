@@ -4,6 +4,7 @@
   "description": "Package to get and set states of the energenie power stripe.",
   "main": "src\\EnergenieMagic.js",
   "dependencies": {
+    "eslint": "^4.10.0",
     "http": "0.0.0",
     "uri": "^0.1.0"
   },
