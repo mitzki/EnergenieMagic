@@ -18,9 +18,9 @@ cd energenie-magic
 npm install
 # UPDATING IP ADRESS, PASSWORD AND PORT IN SAMPLES FILES FOR YOUR ENVIRONMENT
 # GET ALL STATES
-node node .\samples\getPowerStates.js
+node .\samples\getPowerStates.js
 # TURN ALL SOCKETS ON
-node node .\samples\turnAllSocketsOn.js
+node .\samples\turnAllSocketsOn.js
 ```
 ## getSockets()
 Get information of sockets.
