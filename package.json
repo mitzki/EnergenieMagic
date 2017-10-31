@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "Package to get and set states of the energenie power stripe.",
   "main": "src\\EnergenieMagic.js",
+  "dependencies": {
+    "http": "0.0.0",
+    "uri": "^0.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.1"
+  },
   "repository": "https://github.com/mitzki/energenie-magic.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
