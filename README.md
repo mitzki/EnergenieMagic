@@ -1,7 +1,7 @@
 # energenie-magic
 Package to get and set states of the energenie power stripe sockets.
 
-See in /samples folder for some examples.
+See in [/samples](/samples) folder for some examples.
 
 Tested with Node 8.5.0
 
@@ -40,6 +40,9 @@ Get information of sockets as JSON
 ```
 
 ## setSocketState(id, state)
+Set socket of power stride. 
++ `id` is the key of the getSockets() result JSON.
++ `state` is a boolean. 
 ```javascript
 power_stride.setSocketState('cte1', false).then(function(val) {
     console.log(val);
