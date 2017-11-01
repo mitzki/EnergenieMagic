@@ -14,8 +14,8 @@
             },{
                 "type": "node",
                 "request": "launch",
-                "name": "turnAllSocketsOn",
-                "program": "${workspaceRoot}\\samples\\turnAllSocketsOn",
+                "name": "setPowerStates",
+                "program": "${workspaceRoot}\\samples\\setPowerStates",
                 "args": [
                     "--host",
                     "192.168.78.79"
