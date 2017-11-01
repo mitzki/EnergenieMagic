@@ -5,7 +5,7 @@
   const SOCKET_ACTIONS = {
     SET_SOCK_STATE: { PATH: '/energenie.html', METHOD: 'POST' },
     GET_SOCKS: { PATH: '/status.html', METHOD: 'GET' }
-  }
+  };
   /** EnergenieCore Class */
   let energenieCore;
   /** Information about sockets on Energenie power strip. */
@@ -32,7 +32,6 @@
      * @param {boolean} state Future state of the socket.
      */
     setSocketState(id, state) {
-      //return energenieCore.setSocket(id, state);
       return new Promise((resolve, reject) => {
         if (sockets[id]) {
           state = (state == true || state == '1') ? '1' : '0';
@@ -55,7 +54,6 @@
      * array.
      */
     getSockets() {
-      //return energenieCore.getSockets();
       return new Promise((resolve, reject) => {
         energenieCore.sendPostRequest(SOCKET_ACTIONS.GET_SOCKS, '')
           .then(function(res) {
@@ -91,7 +89,6 @@
               };
             }
 
-            console.info('GOT_SOCKETS');
             console.info(sockets);
             resolve(sockets);
           }).catch(function(err) {
@@ -99,39 +96,6 @@
             console.error(err);
             reject(new Error(err));
           });
-      });
-    }
-
-    /**
-     * For use set socket action via express.
-     * 
-     * @param {Http.request} req 
-     * @param {Http.response} res 
-     */
-    setSocketStateViaRequest(req, res) {
-      let url_parts = url.parse(req.url, true);
-      let query = url_parts.query;
-      let id = query.key;
-      let state = query.state;
-      
-      that.setSocketState(id, state).then(function(val) {
-        res.status(200).send(true);
-      }).catch(function(err) {
-        res.status(500).send(new Error(err));
-      });
-    }
-
-    /**
-     * For use get sockets action via express.
-     * 
-     * @param {Http.request} req 
-     * @param {Http.response} res 
-     */
-    getSocketsViaRequest(req, res) {
-      that.getSockets().then(function(sockets) {
-        res.status(200).send(JSON.stringify(sockets));
-      }).catch(function(err) {
-        res.status(500).send(new Error(err)); 
       });
     }
   }
