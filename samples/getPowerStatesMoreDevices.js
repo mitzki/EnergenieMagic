@@ -13,9 +13,12 @@
     password: ''
   }]);
 
-  powerStrips.getSocketStates().then(function(sockets) {
-    console.log(sockets);
-  }).catch(function(err) {
-    console.error(new Error(err)); 
+  powerStrips.setSocketState('192.168.78.79', '1', false).then(() => {
+    powerStrips.getSocketStates().then(function(sockets) {
+      console.log(sockets);
+    }).catch(function(err) {
+      console.error(new Error(err)); 
+    });
   });
+
 }

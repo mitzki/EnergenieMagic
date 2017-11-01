@@ -21,6 +21,12 @@
                     "192.168.78.79"
                 ],
                 "cwd": "${workspaceRoot}"
+            },{
+                "type": "node",
+                "request": "launch",
+                "name": "run EnergenieManager",
+                "program": "${workspaceRoot}\\samples\\getPowerStatesMoreDevices",
+                "cwd": "${workspaceRoot}"
             }
         ]
     }
