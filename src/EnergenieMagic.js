@@ -33,18 +33,21 @@
      */
     setSocketState(id, state) {
       return new Promise((resolve, reject) => {
-        if (sockets[id]) {
-          state = (state == true || state == '1') ? '1' : '0';
-          let postData = id  + '=' + state;
-          energenieCore.sendPostRequest(SOCKET_ACTIONS.SET_SOCK_STATE, postData)
-            .then((val) => {     
-              console.info('Updating ' + id + ' to ' + state + ' finished.');
-              resolve(true);
-            }).catch((err) => {
-              console.error('Updating ' + id + ' to ' + state + ' failed.');
-              reject(new Error(err));
-            });
-        }
+        that.getSockets().then(() => {
+          if (sockets[id]) {
+            state = (state == true || state == '1') ? '1' : '0';
+            let postData = id  + '=' + state;
+            energenieCore.sendPostRequest(
+              SOCKET_ACTIONS.SET_SOCK_STATE, postData)
+              .then((val) => {     
+                console.info('Updating ' + id + ' to ' + state + ' finished.');
+                resolve(true);
+              }).catch((err) => {
+                console.error('Updating ' + id + ' to ' + state + ' failed.');
+                reject(new Error(err));
+              });
+          }
+        });
       });
     }
 
