@@ -7,18 +7,20 @@
    */
   const EnergenieManager = require('../src/EnergenieManager.js');
   
-  const powerStrips = new EnergenieManager([{
+  let powerStrips = new EnergenieManager([{
     host: '192.168.78.79',
     port: 80,
     password: ''
   }]);
 
-  powerStrips.setSocketState('192.168.78.79', '1', false).then(() => {
+  powerStrips.setSocketState('192.168.78.79', 'cte1', false).then(() => {
     powerStrips.getSocketStates().then(function(sockets) {
       console.log(sockets);
     }).catch(function(err) {
       console.error(new Error(err)); 
     });
+  }).catch((err) => {
+    console.error(err);
   });
 
 }
