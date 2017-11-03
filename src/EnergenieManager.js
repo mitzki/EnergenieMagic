@@ -1,5 +1,5 @@
 {
-  const EnergenieStrip = require('./EnergenieMagic');
+  const EnergeniePowerStrip = require('./EnergeniePowerStrip');
   
   let powerStrips = [{ host: '192.168.78.73', port: 80, pw: '' }];
 
@@ -33,7 +33,7 @@
       return new Promise((resolve, reject) => {
         for (var hKey in powerStrips) {
           let host = powerStrips[hKey];
-          let energenieMagic = new EnergenieStrip(host);
+          let energenieMagic = new EnergeniePowerStrip(host);
           energenieMagic.getSockets().then((sockets) => {
             host.sockets = sockets;
             if (checkIfAllStripsAreRequested())
@@ -55,7 +55,7 @@
           return;
         }
         
-        let strip = new EnergenieStrip(stripOptions);
+        let strip = new EnergeniePowerStrip(stripOptions);
         strip.setSocketState(id, state).then(() => {
           resolve(true);
         }).catch(() => {

@@ -5,7 +5,7 @@
    * 
    * @author Michael Kolodziejczyk
    */
-  const EnergenieMagic = require('../src/EnergenieMagic.js');
+  const EnergenieMagic = require('../src/EnergeniePowerStrip.js');
   
   function getArgVByKey(key) {
     let args = process.argv;
