@@ -1,7 +1,7 @@
 {
   const EnergeniePowerStrip = require('./EnergeniePowerStrip');
   
-  let powerStrips = [{ host: '192.168.78.73', port: 80, pw: '' }];
+  let powerStrips = [];
 
   function checkIfAllStripsAreRequested() {
     for (let pKey in powerStrips)
