@@ -1,6 +1,6 @@
 {
   /** Timeout for logoutTimeoutHandler */
-  const TIMEOUT = 10000; //30000;
+  const TIMEOUT = 30000;
   
   /** Handling timeout for logout from Energenie power strip. */
   let timeoutHandler = null;
