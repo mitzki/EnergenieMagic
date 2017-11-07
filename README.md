@@ -9,11 +9,12 @@ npm install --save energenie-magic
 ```
 
 ## Samples
-See in [/samples](/samples) folder for some examples.
+See in [/samples](/samples) folder for some examples. You can try after adding to node_modules with your power strip via cli:
 
 ```bash
+# Get sockets of power strip
 node .\node_modules\enegenie-magic\samples\getSockets --host <string | ip-adress/hostname> [--port <number | default: 80> --password <string | default: ''>]
-
+# Set socket state of power strip 
 node .\node_modules\enegenie-magic\samples\setSocket --host <string | ip-adress/hostname> [--port <number | default: 80> --password <string | default: ''> --state <bool | default: true>]
 ```
 
