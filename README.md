@@ -1,9 +1,9 @@
 # energenie-magic
 Package to get and set states of the energenie power strip sockets.
 
-Tested with Node 8.5.0
+Tested with Node 8.5.0 and [EG-PMS2-LAN](https://energenie.com/item.aspx?id=7416).
 
-## Use it
+## Installation
 ``` 
 npm install --save energenie-magic 
 ```
@@ -11,61 +11,74 @@ npm install --save energenie-magic
 ## Samples
 See in [/samples](/samples) folder for some examples.
 
-### Run
 ```bash
-git clone https://github.com/mitzki/energenie-magic.git
-cd energenie-magic
-npm install
-node .\samples\getPowerStates.js --host <ip-adress/hostname> [--port <port-number> --password <password>]
-node .\samples\turnAllSocketsOn.js  --host <ip-adress/hostname> [--port <port-number> --password <password>]
+node .\node_modules\enegenie-magic\samples\getSockets --host <string | ip-adress/hostname> [--port <number | default: 80> --password <string | default: ''>]
+
+node .\node_modules\enegenie-magic\samples\setSocket --host <string | ip-adress/hostname> [--port <number | default: 80> --password <string | default: ''> --state <bool | default: true>]
 ```
-## getSockets()
+
+## Usage
+
+```javascript
+const EnergenieManager = require('energenie-magic');
+  
+  let powerStrips = new EnergenieManager([
+    {
+      host: '192.168.78.79',
+      port: 80,
+      password: ''
+    }
+  ]);
+```
+### getSockets()
 Get information of sockets of the connected power strip.
 
-### Sample Usage
 ```javascript
-power_strip.getSockets().then(function(sockets) {
-    console.log(sockets);
+power_strips.getSockets().then(function(sockets) {
+    console.info(sockets);
 }).catch(function(err) {
     console.error(new Error(err)); 
 });
 ```
-
-### Returns
+`sockets` looks like:
 ```javascript
-{
-  "cte1": {
-    "key": "cte1",
-    "name": "Socket A",
-    "state": true
-  },
-  "cte2": {
-    "key": "cte2",
-    "name": "Socket B",
-    "state": false
-  },
-  "cte3": {
-    "key": "cte3",
-    "name": "Socket C",
-    "state": true
-  },  
-  "cte4": {
-    "key": "cte4",
-    "name": "Socket D",
-    "state": false
+host: '192.168.78.79',
+plugs: [
+  {
+    "cte1": {
+      "key": "cte1",
+      "name": "Socket A",
+      "state": true
+    },
+    "cte2": {
+      "key": "cte2",
+      "name": "Socket B",
+      "state": false
+    },
+    "cte3": {
+      "key": "cte3",
+      "name": "Socket C",
+      "state": true
+    },  
+    "cte4": {
+      "key": "cte4",
+      "name": "Socket D",
+      "state": false
+    }
   }
-}
+]
 ```
 
-## setSocketState(id, state)
+## setSocketState(host, id, state)
 Set socket of power strip. 
++ `host` Host adress of power strip.
 + `id` is the key of the getSockets() result JSON.
 + `state` is a boolean. 
 
-### Sample Usage
 ```javascript
-power_strip.setSocketState('cte1', false).then(function(val) {
-    console.log(val);
+/* Turning first plug off. */
+power_strips.setSocketState('192.168.78.79', 'cte1', false).then(function(val) {
+    console.info(val);
 }).catch(function(err) {
     console.error(new Error(err));
 });

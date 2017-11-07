@@ -6,6 +6,7 @@
   "dependencies": {
     "eslint": "^4.10.0",
     "http": "0.0.0",
+    "node-minify": "^2.4.0",
     "uri": "^0.1.0"
   },
   "devDependencies": {
