@@ -1,45 +1,71 @@
 {
   const EnergeniePowerStrip = require('./EnergeniePowerStrip');
   
+  /** Socket information of power strips  */
   let powerStrips = [];
-
+  /** Socket options of power strips */
+  let powerStripsOptions = [];
+  
+  /**
+   * Checking each strip if there were a number
+   * of found sockets.
+   * 
+   * @return {bool} Have we found all socks?
+   */
   function checkIfAllStripsAreRequested() {
-    for (let pKey in powerStrips)
-      if (powerStrips[pKey].sockets === null)
+    for (let i = 0; i < powerStripsOptions.length; i++)
+      if (!powerStrips[i]['sockets'])
         return false;
 
     return true;
   }
 
+  /**
+   * Getting options of a power strip.
+   * 
+   * @param {string} host Host name or IP-Adress of power strip
+   * @return {Object} Options of selected power strip. 
+   */
   function getStrip(host) {
-    for (pKey in powerStrips)
-      if (powerStrips[pKey].host === host)
-        return powerStrips[pKey];
+    for (pKey in powerStripsOptions)
+      if (powerStripsOptions[pKey].host === host)
+        return powerStripsOptions[pKey];
 
     return null;
   }
 
+  /**
+   * Energenie Manager Class.
+   * 
+   * Handling a couple of Energenie power strips.
+   * 
+   * @author Michael Kolodziejczyk
+   */
   class EnergenieManager {
     
+    /**
+     * Constructor.
+     * 
+     * @param {Array} hosts Array of power strip hosts objects.  
+     */
     constructor(hosts) {
-      if (hosts) powerStrips = hosts;
-
-      powerStrips.forEach((powerStrip) => {
-        powerStrip.sockets = null;
-      });
+      if (hosts) powerStripsOptions = hosts;
     }
     
+    /**
+     * Getting sock states.
+     * 
+     * @return {Promise} Sockets of all power strips.
+     */
     getSocketStates() {      
       return new Promise((resolve, reject) => {
-        for (var hKey in powerStrips) {
-          let host = powerStrips[hKey];
-          let energenieMagic = new EnergeniePowerStrip(host);
+        for (var i = 0; i < powerStripsOptions.length; i++) {
+          let energenieMagic = new EnergeniePowerStrip(powerStripsOptions[i]);
           energenieMagic.getSockets().then((sockets) => {
-            host.sockets = sockets;
+            powerStrips.push(sockets);
             if (checkIfAllStripsAreRequested())
               resolve(powerStrips);
           }).catch(() => {
-            host.sockets = [];  
             if (checkIfAllStripsAreRequested())
               resolve(powerStrips);
           });
@@ -47,26 +73,27 @@
       });
     }
 
-    setSocketState(host, id, state) {
-      return new Promise((resolve, reject) => {
-        let stripOptions = getStrip(host);
-        if (stripOptions === null) {
-          resolve(false);
-          return;
-        }
-        
+    /**
+     * Setting sock state of Energenie plug stripe by using id and state.
+     * The power stripe will be selected via host adress or IP.
+     * 
+     * @param {String} host Host or IP-Adress.
+     * @param {String} id ID of the socket.
+     * @param {boolean} state Future state of the socket.
+     * @return {Promise} {boolean} Was changing the socket state, okay?
+     */
+    setSocketState(stripOptions, id, state) {
+      return new Promise((resolve, reject) => {       
         let strip = new EnergeniePowerStrip(stripOptions);
-        strip.setSocketState(id, state).then(() => {
-          resolve(true);
-        }).catch(() => {
-          resolve(false);
-        });
+        resolve(strip.setSocketState(id, state));
       });
     }
 
     /**
-     * For use set socket action via express.
-     * 
+     * For use set socket action via express. e.g.
+     *  app.get(ENERGENIE_PREFIX + '/setState', 
+     *    energenie.setSocketStateViaRequest);
+     *
      * @param {Http.request} req 
      * @param {Http.response} res 
      */
@@ -85,7 +112,9 @@
     }
 
     /**
-     * For use get sockets action via express.
+     * For use get sockets action via express. e.g.
+     *  app.get(ENERGENIE_PREFIX + '/getSocks', 
+     *    energenie.getSocketsViaRequest);
      * 
      * @param {Http.request} req 
      * @param {Http.response} res 
@@ -97,7 +126,7 @@
         res.status(500).send(new Error(err)); 
       });
     }
-  } 
+  }
 
   module.exports = EnergenieManager;
 }
