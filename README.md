@@ -13,9 +13,9 @@ See in [/samples](/samples) folder for some examples. You can try after adding t
 
 ```bash
 # Get sockets of power strip
-node .\node_modules\enegenie-magic\samples\getSockets --host <string | ip-adress/hostname> [--port <number | default: 80> --password <string | default: ''>]
+node .\node_modules\enegenie-magic\samples\getSockets --host <ip-adress/hostname> [--port <default: 80> --password <default: ''>]
 # Set socket state of power strip 
-node .\node_modules\enegenie-magic\samples\setSocket --host <string | ip-adress/hostname> [--port <number | default: 80> --password <string | default: ''> --state <bool | default: true>]
+node .\node_modules\enegenie-magic\samples\setSocket --host <ip-adress/hostname> --id <id> [--port <default: 80> --password <default: ''> --state <default: true>]
 ```
 
 ## Usage
