@@ -4,8 +4,8 @@
             {
                 "type": "node",
                 "request": "launch",
-                "name": "getPowerStates",
-                "program": "${workspaceRoot}\\samples\\getPowerStates",
+                "name": "Get socket states",
+                "program": "${workspaceRoot}\\samples\\getSockets",
                 "args": [
                     "--host",
                     "192.168.78.79"
@@ -14,18 +14,18 @@
             },{
                 "type": "node",
                 "request": "launch",
-                "name": "setPowerStates",
-                "program": "${workspaceRoot}\\samples\\setPowerStates",
+                "name": "Set socket state",
+                "program": "${workspaceRoot}\\samples\\setSocket",
                 "args": [
                     "--host",
-                    "192.168.78.79"
+                    "192.168.78.79",
+                    "--port",
+                    "80",
+                    "--password",
+                    "",
+                    "--id",
+                    "cte1"
                 ],
-                "cwd": "${workspaceRoot}"
-            },{
-                "type": "node",
-                "request": "launch",
-                "name": "run EnergenieManager",
-                "program": "${workspaceRoot}\\samples\\getPowerStatesMoreDevices",
                 "cwd": "${workspaceRoot}"
             }
         ]
