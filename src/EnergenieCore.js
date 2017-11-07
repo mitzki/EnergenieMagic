@@ -4,7 +4,8 @@
 
   /** Energenie power strip core actions */
   const CORE_ACTIONS = {
-    LOGIN: { PATH: '/login.html', METHOD: 'POST' }
+    LOGIN: { PATH: '/login.html', METHOD: 'POST' },
+    LOGOUT: { PATH: '/login.html', METHOD: 'GET' }
   };  
   
   /** Options to control Energenie power strip. */
@@ -18,53 +19,28 @@
    * @param {Object} postData_ Postdata for overwriting standard from options.
    * @return {Promise} boolean If login was successfull. 
    */
-  function login(postData_) {
+  function login() {
     return new Promise(function (resolve, reject) {
-      let postData = 'pw=' + options.password;
-      if (postData_)
-        postData = postData_;
-
       if (logoutTimer.stillTicking()) {
         resolve(true); return;
       }
 
-      let request = http.request({
-        method: CORE_ACTIONS.LOGIN.METHOD,
-        port: options.port,
-        host: options.host,
-        path: CORE_ACTIONS.LOGIN.PATH,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': Buffer.byteLength(postData)
-        }
-      }, function(res) {
-        let data = '';
-        res.setEncoding('utf8');
-        res.on('data', (chunk) => {
-          data += chunk;
-        });
-        res.on('end', () => {
+      request(CORE_ACTIONS.LOGIN, 'pw=' + options.password)
+        .then((data) => {
           logout();
-          if (!postData_) {
-            // Searching for "var sockstates = [0,0,0,0]" from index.html
-            var regexSock = /var sockstates = \[(.*?)\];/;
-            var sockContent = regexSock.exec(data);
-            if (!sockContent) { 
-              reject(new Error('LOGIN_FAILED')); return;
-            }
+          // Searching for "var sockstates = [0,0,0,0]" from index.html
+          var regexSock = /var sockstates = \[(.*?)\];/;
+          var sockContent = regexSock.exec(data);
+          if (!sockContent) { 
+            reject(new Error('LOGIN_FAILED')); return;
           }
-          
           resolve(true);
         });
-      }, function(err) {
-        if (!postData_)
-          console.error('LOGIN_ERR', err);
+    }).catch((err) => {
+      if (!postData_)
+        console.error('LOGIN_ERR', err);
 
-        reject(err);
-      });
-
-      request.write(postData);
-      request.end();
+      reject(err);
     });
   }
   
@@ -77,22 +53,21 @@
    * @return {Promise} boolean If login was successfull. 
    */
   function logout() {
-    return new Promise(function (resolve, reject) {
-      logoutTimer.set(() => {
-        login('')
+    return logoutTimer.set(
+      () => {
+        request(CORE_ACTIONS.LOGOUT, '')
           .then(function() {
-            console.log('LOGOUT');
-            resolve(true);
+            console.info('LOGOUT');
+            return true;
           }).catch(function(err) {
-            console.error('LOGOUT_ERROR', err);
-            reject(err);
+            return new Error('LOGOUT_ERROR', err);
           });
       });
-    });
   }
 
   /**
-   * Does the http request, collecting the data and return it.
+   * Collecting the data from the http-request and return it.
+   * Resetting logout timer while getting data and being requested.
    * 
    * @return {Promise} Collected data from http request.
    */
@@ -118,7 +93,7 @@
       }, function(err) {
         reject(err);
       });
-
+      
       request.write(postData);
       request.end();
     });
@@ -126,6 +101,12 @@
 
   /**
    * Energie Core Class.
+   * 
+   * Handling the http requests. Holds a session to
+   * Energenie strip 30 seconds, before logout. Every
+   * time a request is done while the session is still
+   * alive the logoutTimeoutHandler will be reset to
+   * wait 30 seconds before logging out from power strip.
    * 
    * @author Michael Kolodziejczyk
    */
@@ -136,7 +117,7 @@
     }
 
     /**
-     * Sending http request to Energenie power stripe by using the request
+     * Sending http request to Energenie power strip by using the request
      * function. 
      * You can use the defined *_ACTIONS ENUMS.
      * 
