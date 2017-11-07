@@ -21,7 +21,7 @@ node .\node_modules\enegenie-magic\samples\setSocket --host <string | ip-adress/
 
 ```javascript
 const EnergenieManager = require('energenie-magic');
-  
+  /* Add your power strips */
   let powerStrips = new EnergenieManager([
     {
       host: '192.168.78.79',
@@ -43,7 +43,8 @@ power_strips.getSockets().then(function(sockets) {
 `sockets` looks like:
 ```javascript
 host: '192.168.78.79',
-plugs: [
+name: 'Living Room',
+sockets: [
   {
     "cte1": {
       "key": "cte1",
