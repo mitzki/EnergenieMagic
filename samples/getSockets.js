@@ -5,7 +5,7 @@
    * 
    * @author Michael Kolodziejczyk
    */
-  const EnergenieMagic = require('../src/EnergeniePowerStrip.js');
+  const EnergenieMagic = require('../src/EnergenieManager.js');
   
   function getArgVByKey(key) {
     let args = process.argv;
@@ -20,18 +20,17 @@
     return '';
   }
 
-  if (process.argv.length < 3) {
+  if (process.argv.length < 2) {
     console.error(new Error('NOT_ENOUGH_ARGUMENTS'));
   } else {
-    const power_strip = new EnergenieMagic({
+    const power_strip = new EnergenieMagic([{
       password: getArgVByKey('--password'),
       host: getArgVByKey('--host'),
       port: getArgVByKey('--port')
-    });
-    let sockets = {};
+    }]);
 
-    power_strip.getSockets().then(function(sockets_) {
-      sockets = sockets_;
+    power_strip.getSocketStates().then(function(sockets) {
+      console.log(sockets);
     }).catch(function(err) {
       console.error(new Error(err)); 
     });
