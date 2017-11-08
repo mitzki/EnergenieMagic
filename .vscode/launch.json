@@ -24,7 +24,9 @@
                     "--password",
                     "",
                     "--id",
-                    "cte1"
+                    "cte1",
+                    "--state",
+                    "false"
                 ],
                 "cwd": "${workspaceRoot}"
             }
