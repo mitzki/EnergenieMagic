@@ -5,7 +5,9 @@
   let powerStrips = [];
   /** Socket options of power strips */
   let powerStripsOptions = [];
-  
+  /** Class context */
+  let that;
+
   /**
    * Checking each strip if there were a number
    * of found sockets.
@@ -50,6 +52,8 @@
      */
     constructor(hosts) {
       if (hosts) powerStripsOptions = hosts;
+
+      that = this;
     }
     
     /**
@@ -104,7 +108,7 @@
       let id = query.key;
       let state = query.state;
       
-      this.setSocketState(host, id, state).then(function(val) {
+      that.setSocketState(host, id, state).then(function(val) {
         res.status(200).send(true);
       }).catch(function(err) {
         res.status(500).send(new Error(err));
@@ -120,7 +124,7 @@
      * @param {Http.response} res 
      */
     getSocketsViaRequest(req, res) {
-      this.getSocketStates().then(function(sockets) {
+      that.getSocketStates().then(function(sockets) {
         res.status(200).send(JSON.stringify(sockets));
       }).catch(function(err) {
         res.status(500).send(new Error(err)); 
