@@ -1,4 +1,5 @@
 {
+  const url = require('url');
   const EnergeniePowerStrip = require('./EnergeniePowerStrip');
   
   /** Socket information of power strips  */
@@ -98,7 +99,7 @@
     }
 
     /**
-     * Setting sock state of Energenie plug stripe by using id and state.
+     * Setting sock state of Energenie plug strip by using id and state.
      * The power stripe will be selected via host adress or IP.
      * 
      * @param {String} host Host or IP-Adress.
@@ -107,7 +108,7 @@
      * @return {Promise} {boolean} Was changing the socket state, okay?
      */
     setSocketState(stripOptions, id, state) {
-      return new Promise((resolve, reject) => {       
+      return new Promise((resolve, reject) => {
         let strip = new EnergeniePowerStrip(stripOptions);
         resolve(strip.setSocketState(id, state));
       });
@@ -115,9 +116,11 @@
 
     /**
      * For use set socket action via express. e.g.
-     *  app.get(ENERGENIE_PREFIX + '/setState', 
-     *    energenie.setSocketStateViaRequest);
-     *
+     * app.get('/setSocket', energenie.setSocketStateViaRequest);
+     * 
+     * call via http://your-ip/setSocket?
+     *  host=<host>&port=<port>&password=<password>&id=<id>&state=<state>
+     * 
      * @param {Http.request} req 
      * @param {Http.response} res 
      */
@@ -125,20 +128,21 @@
       let url_parts = url.parse(req.url, true);
       let query = url_parts.query;
       let host = query.host;      
-      let id = query.key;
-      let state = query.state;
-      
-      that.setSocketState(host, id, state).then(function(val) {
-        res.status(200).send(true);
-      }).catch(function(err) {
-        res.status(500).send(new Error(err));
-      });
+      let stripOptions = getStrip(host);
+
+      that.setSocketState(stripOptions, query.key, query.state)
+        .then(function(val) {
+          res.status(200).send(true);
+        }).catch(function(err) {
+          res.status(500).send(new Error(err));
+        });
     }
 
     /**
      * For use get sockets action via express. e.g.
-     *  app.get(ENERGENIE_PREFIX + '/getSocks', 
-     *    energenie.getSocketsViaRequest);
+     * app.get('/getSockets', energenie.getSocketsViaRequest);
+     * 
+     * call via http://your-ip/getSockets
      * 
      * @param {Http.request} req 
      * @param {Http.response} res 
