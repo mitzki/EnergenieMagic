@@ -1,5 +1,4 @@
 {
-  const url = require('url');
   const EnergenieCore = require('./EnergenieCore');
   
   /** @type {Enum} Socket Actions */
