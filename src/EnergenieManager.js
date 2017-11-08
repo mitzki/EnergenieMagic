@@ -37,6 +37,20 @@
   }
 
   /**
+   * Checking if the powerstrip was already added.
+   * 
+   * @param {String} powerStripID Power strip count.
+   * @return {true | number}  True if should be updated, socket count if update.
+   */
+  function shouldBeAddedOrUpdated(powerStripID) {
+    for (let sCnt = 0; sCnt < powerStrips.length; sCnt++)
+      if (powerStrips[sCnt].host === powerStripsOptions[powerStripID].host)
+        return sCnt;
+
+    return true;
+  }
+
+  /**
    * Energenie Manager Class.
    * 
    * Handling a couple of Energenie power strips.
@@ -61,12 +75,18 @@
      * 
      * @return {Promise} Sockets of all power strips.
      */
-    getSocketStates() {      
+    getSocketStates() {  
       return new Promise((resolve, reject) => {
-        for (var i = 0; i < powerStripsOptions.length; i++) {
-          let energenieMagic = new EnergeniePowerStrip(powerStripsOptions[i]);
+        for (var pCnt = 0; pCnt < powerStripsOptions.length; pCnt++) {
+          let powerStripID = pCnt;
+          let energenieMagic = new EnergeniePowerStrip(powerStripsOptions[pCnt]);
           energenieMagic.getSockets().then((sockets) => {
-            powerStrips.push(sockets);
+            let pUpdateKey = shouldBeAddedOrUpdated();
+            if (pUpdateKey === true)
+              powerStrips.push(sockets);
+            else
+              powerStrips[pUpdateKey] = sockets;
+              
             if (checkIfAllStripsAreRequested())
               resolve(powerStrips);
           }).catch(() => {
