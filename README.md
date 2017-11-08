@@ -43,32 +43,28 @@ power_strips.getSockets().then(function(sockets) {
 ```
 `sockets` looks like:
 ```javascript
-host: '192.168.78.79',
-name: 'Living Room',
-sockets: [
-  {
-    "cte1": {
-      "key": "cte1",
-      "name": "Socket A",
-      "state": true
-    },
-    "cte2": {
-      "key": "cte2",
-      "name": "Socket B",
-      "state": false
-    },
-    "cte3": {
-      "key": "cte3",
-      "name": "Socket C",
-      "state": true
-    },  
-    "cte4": {
-      "key": "cte4",
-      "name": "Socket D",
-      "state": false
-    }
-  }
-]
+[{
+	host: "192.168.78.79",
+	name: "Wohnzimmer",
+	sockets: [{
+      key: "cte1",
+      state: true,
+      name: "Socket A"
+		}, {
+      key: "cte2",
+      state: true,
+      name: "Socket B"
+		}, {
+      key: "cte3",
+      state: true,
+      name: "Socket C"
+		}, {
+      key: "cte4",
+      state: true,
+      name: "Socket D"
+		}
+	]
+}]
 ```
 
 ## setSocketState(host, id, state)
