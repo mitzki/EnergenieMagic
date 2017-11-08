@@ -16,7 +16,6 @@
    * Login to Energenie via http request. Detect if login worked by searching 
    * in the script tag for the sockstates in the response.
    * 
-   * @param {Object} postData_ Postdata for overwriting standard from options.
    * @return {Promise} boolean If login was successfull. 
    */
   function login() {
@@ -37,9 +36,7 @@
           resolve(true);
         });
     }).catch((err) => {
-      if (!postData_)
-        console.error('LOGIN_ERR', err);
-
+      console.error('LOGIN_ERR', err);
       reject(err);
     });
   }
