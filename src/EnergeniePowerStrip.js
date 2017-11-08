@@ -19,6 +19,21 @@
   let that;
 
   /**
+   * Converting JSON path to JS-Array
+   * 
+   * @param {JSON} json json to convert to array.
+   * @return {Array} json as array. 
+   */
+  function json2array(json){
+    var arr = [];
+    var jKeys = Object.keys(json);
+    for (let jCnt = 0; jCnt < jKeys.length; jCnt++)
+      arr.push(json[jKeys[jCnt]]);
+
+    return arr;
+  }
+
+  /**
    * Grabbing power strip name from header in body tag.
    * 
    * @param {String} bodyData <body>(.*)</body>
@@ -138,6 +153,7 @@
               res.indexOf('<body>') + 6, res.indexOf('</body>')
             );
             
+            /* Grabbing information from request */
             grabSockStates(scriptData);
             grabSockNames(scriptData);
             grabPowerStripName(bodyData);
@@ -145,7 +161,7 @@
             let socks = {
               host: options.host,
               name: name,
-              sockets: sockets
+              sockets: json2array(sockets)
             };
 
             resolve(socks);
