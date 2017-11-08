@@ -66,7 +66,7 @@ power_strips.getSockets().then(function(sockets) {
 }, ...]
 ```
 
-## setSocketState(powerStripOptions, id, state)
+## setSocketState(host, id, state)
 Set socket of power strip.
 + `host`: Hostname or IP-Adress of power strip.
 + `id`: Key/ID of socket.
