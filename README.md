@@ -66,17 +66,18 @@ power_strips.getSockets().then(function(sockets) {
 }, ...]
 ```
 
-## setSocketState(host, id, state)
-Set socket of power strip. 
-+ `host` Host adress of power strip.
-+ `id` is the key of the getSockets() result JSON.
-+ `state` is a boolean. 
+## setSocketState(powerStripOptions, id, state)
+Set socket of power strip.
++ `host`: Hostname or IP-Adress of power strip.
++ `id`: Key/ID of socket.
++ `state`: Bool represents on/off.
 
 ```javascript
 /* Turning first plug off. */
-power_strips.setSocketState('192.168.78.79', 'cte1', false).then(function(val) {
+power_strips.setSocketState('192.168.78.79', 'cte1', false)
+  .then(function(val) {
     console.log(val);
-}).catch(function(err) {
+  }).catch(function(err) {
     console.error(new Error(err));
-});
+  });
 ```
