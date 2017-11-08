@@ -36,7 +36,7 @@ Get information of sockets of the connected power strip.
 
 ```javascript
 power_strips.getSockets().then(function(sockets) {
-    console.info(sockets);
+    console.log(sockets);
 }).catch(function(err) {
     console.error(new Error(err)); 
 });
@@ -44,27 +44,26 @@ power_strips.getSockets().then(function(sockets) {
 `sockets` looks like:
 ```javascript
 [{
-	host: "192.168.78.79",
-	name: "Wohnzimmer",
-	sockets: [{
-      key: "cte1",
-      state: true,
-      name: "Socket A"
-		}, {
-      key: "cte2",
-      state: true,
-      name: "Socket B"
-		}, {
-      key: "cte3",
-      state: true,
-      name: "Socket C"
-		}, {
-      key: "cte4",
-      state: true,
-      name: "Socket D"
-		}
-	]
-}]
+  host: "192.168.78.79",
+  name: "Wohnzimmer",
+  sockets: [{
+    key: "cte1",
+    state: true,
+    name: "Socket A"
+  }, {
+    key: "cte2",
+    state: true,
+    name: "Socket B"
+  }, {
+    key: "cte3",
+    state: true,
+    name: "Socket C"
+  }, {
+    key: "cte4",
+    state: true,
+    name: "Socket D"
+  }]
+}, ...]
 ```
 
 ## setSocketState(host, id, state)
@@ -76,7 +75,7 @@ Set socket of power strip.
 ```javascript
 /* Turning first plug off. */
 power_strips.setSocketState('192.168.78.79', 'cte1', false).then(function(val) {
-    console.info(val);
+    console.log(val);
 }).catch(function(err) {
     console.error(new Error(err));
 });
