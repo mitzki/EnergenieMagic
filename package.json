@@ -8,10 +8,12 @@
     "uri": "^0.1.0"
   },
   "devDependencies": {
-    "eslint": "^4.7.1"
+    "eslint": "^4.7.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify-es": "git://github.com/gruntjs/grunt-contrib-uglify.git#harmony"
   },
   "bugs": {
-    "url" : "https://github.com/mitzki/energenie-magic/issues"
+    "url": "https://github.com/mitzki/energenie-magic/issues"
   },
   "repository": "https://github.com/mitzki/energenie-magic.git",
   "scripts": {
